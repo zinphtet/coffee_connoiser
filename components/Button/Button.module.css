@@ -1,0 +1,13 @@
+.btn{
+    font-size: 2rem;
+    padding: 1.5rem 3rem;
+    background-color: var(--color-second);
+    outline: none;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: opacity .2s linear;
+}
+.btn:hover{
+    opacity: .85;
+}

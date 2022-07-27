@@ -1,0 +1,26 @@
+
+.shop{
+    /* max-width: 27rem; */
+    /* border: 1px solid red; */
+    max-width: 35rem;
+    padding: 2rem; 
+     cursor: pointer;
+    background: rgba( 255, 255, 255, 0.25 );
+   box-shadow: 0 5px 10px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 0px );
+  -webkit-backdrop-filter: blur( 0px );
+    border-radius: 1rem;
+   border: 1px solid rgba( 255, 255, 255, 0.18 );
+   transition: all .2s linear;
+}
+.shop:hover{
+    background: rgba( 255, 255, 255, 0.6 );
+}
+.title{
+    font-size: 2rem;
+    padding-block: 1rem;
+    color: var(--color-black);
+}
+.img{
+    border-radius: 2rem;
+}

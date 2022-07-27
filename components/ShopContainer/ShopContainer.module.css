@@ -1,0 +1,22 @@
+
+.shop_container{
+    max-width: 110rem;
+    padding:  2rem;
+    margin: auto;
+    /* border: 2px solid teal; */
+   
+}
+.stores{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(27rem , 1fr));
+    grid-gap: 4rem;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.container_title{
+    font-size: 3rem;
+    padding-bottom: 4rem ;
+}

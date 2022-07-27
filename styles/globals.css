@@ -1,9 +1,36 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Edu+QLD+Beginner:wght@400;500&family=Karla:wght@200;300;400&display=swap');
+
+/* font-family: 'Edu QLD Beginner', cursive;
+font-family: 'Karla', sans-serif; */
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-image: url('../public/background.png');
+    background-size: cover;
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    padding-block: 2rem 4rem;
+    font-family: 'Karla', sans-serif;
+    
+}
+html{
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    color: #fff;
+    line-height: 1;
+
+}
+:root{
+  --color-main : #fff;
+  --color-second : #323ba7;
+  --color-black : #000;
+  --font-heading : 'Edu QLD Beginner', cursive;
+  --font-text : 'Karla', sans-serif; 
 }
 
 a {
@@ -13,14 +40,15 @@ a {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+
+ 
+.footer{
+  font-size: 4rem;
+  text-align: center;
+  padding-bottom: 2rem;
+  color: var(--color-main);
 }
