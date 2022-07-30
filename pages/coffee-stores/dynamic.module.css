@@ -24,8 +24,13 @@
     flex: 1;
 }
 .img_container{
-    max-width: 45rem;
+    /* max-width: 45rem; */
+    width: 100%;
+    /* width: 50rem; */
     /* border: 2px solid red; */
+    /* height: 40rem; */
+    /* height: 100%; */
+    position: relative;
 }
 .img{
     border-radius: 2rem;
@@ -43,7 +48,7 @@
    border: 1px solid rgba( 255, 255, 255, 0.18 );
    transition: all .2s linear;
    padding: 2rem;
-   max-width: 30rem;
+   /* max-width: 30rem; */
 }
 .location,.nearby,.star{
     font-size: 2rem;
@@ -55,3 +60,23 @@
 .location>svg,.nearby>svg,.star>svg{
     margin-right: 2rem;
 }
+
+@media screen and (max-width : 56.25rem) {
+    .info{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .info >*{
+        width: 100%;
+        flex: none;
+        /* align-self: stretch; */
+    }
+    .img_container{
+       /* width: 40rem; */
+       height: 30vh;
+       object-fit: cover;
+    }
+ }

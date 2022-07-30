@@ -12,6 +12,7 @@
     font-size: 6rem;
     font-weight: medium;
     font-family: var(--font-heading);
+  
 }
 .banner_title span{
   color: var(--color-second);
@@ -20,3 +21,23 @@
     font-size: 3rem;
 
 }
+
+
+@media screen and (max-width : 56.25rem) {
+    .banner_title{
+
+        color:red;
+    }
+ }
+ @media screen and (max-width : 37.5rem) {
+    .banner_title{
+
+        color:green;
+    }
+ }
+ @media screen and (max-width : 25rem) {
+    .banner_title{
+
+        color:blue;
+    }
+ }

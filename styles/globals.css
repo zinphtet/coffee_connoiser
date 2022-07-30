@@ -23,7 +23,7 @@ html{
     scroll-behavior: smooth;
     color: #fff;
     line-height: 1;
-
+  
 }
 :root{
   --color-main : #fff;
@@ -51,4 +51,25 @@ a {
   text-align: center;
   padding-bottom: 2rem;
   color: var(--color-main);
+}
+
+
+
+@media screen and (max-width : 56.25rem) {
+  html{
+
+    font-size:59.375%;
+  }
+}
+@media screen and (max-width : 37.5rem) {
+  html{
+
+    font-size:56.25%;
+  }
+}
+@media screen and (max-width : 25rem) {
+  html{
+
+    font-size:53.125%;
+  }
 }

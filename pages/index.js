@@ -4,17 +4,19 @@ import styles from '../styles/Home.module.css';
 import Banner from '../components/Banner/Banner';
 import ShopContainer from '../components/ShopContainer/ShopContainer';
 import dummyData from '../public/dummyData';
-
+import fetchData from '../public/fetchData/fetchData';
 export async function getStaticProps(context) {
-	console.log('DUMMY DATA', dummyData);
+	// console.log('DUMMY DATA', dummyData);
+	const coffeeShops = await fetchData();
+	// console.log('COFFEESHOPS >>', coffeeShops);
 	return {
 		props: {
-			dummyData,
+			coffeeShops,
 		},
 	};
 }
 
-export default function Home({dummyData}) {
+export default function Home({ coffeeShops }) {
 	// console.log('PROPS >>', props);
 	return (
 		<>
@@ -24,7 +26,7 @@ export default function Home({dummyData}) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Banner />
-			<ShopContainer data ={dummyData} />
+			<ShopContainer data={coffeeShops} />
 		</>
 	);
 }

@@ -9,18 +9,22 @@ import { MdNearMe ,MdStarRate} from "react-icons/md";
 import dummyData from '../../public/dummyData'
 import Button from '../../components/Button/Button'
 import { useState } from 'react'
+import Head from 'next/head'
+import fetchData from '../../public/fetchData/fetchData'
 export async function getStaticPaths() {
-  const pathsArr = dummyData.map((data)=>{
+  const data = await fetchData()
+  const pathsArr = data.map((data)=>{
     return {params :{id : data.id.toString()}}
   })
   return {
-    // paths: [{ params: { id: '0' } }, { params: { id: '1' }},{ params: { id: '300' } }],
+    // paths: [{ params: { id: '0' } }, { params: { id: '1' }}],
     paths:pathsArr,
-    fallback: false, // can also be true or 'blocking'
+    fallback:true, // can also be true or 'blocking'
   }
 }
 
 export async function getStaticProps({params}) {
+  const data = await fetchData()
   // const router = useRouter();
   // const {id} = router.query;
   // const curPost = dummyData.find((post)=>post.id.toString()===id)
@@ -28,18 +32,25 @@ export async function getStaticProps({params}) {
   // console.log('STATIC PROPS ',staticProps)
   return {
     // Passed to the page component as props
-    props: { post: dummyData.find((item)=>item.id.toString() === id) },
+    props: { post: data.find((item)=>item.id.toString() === id) },
   }
 }
 
 const DynamicShop = ({post}) => {
-  //   const router = useRouter()
+    const router = useRouter()
+    if(router.isFallback){
+      return <div>Loading ....</div>
+    }
   // const { id } = router.query
 const [star , setStar] = useState(1)
   // console.log("CURRENT PROPS ",post)
-  const {name , imgUrl ,address , neighbourhood} = post
+  const {name , imgUrl ,street , nearby} = post
   const handleVote = ()=>setStar(prev=>prev+1)
   return (
+    <>
+    <Head>
+      <title>{name}</title>
+    </Head>
    <div className={style.dynamic_shop}>
        <p className={style.back_home}>
             <Link  href="/" scroll={false}>
@@ -53,16 +64,16 @@ const [star , setStar] = useState(1)
           </h3>
           <div className={style.info}>
              <div className={style.img_container}>
-                <Image src={imgUrl} layout='intrinsic' className={style.img}
-                 width='500' height='300'
+                <Image src={imgUrl} layout='fill' className={style.img}
+                objectFit='cover'
                  />
              </div>
              <div className={style.glass_info}>
                    <div className={style.location}>
-                     <GoLocation/> <p>{address}</p> 
+                     <GoLocation/> <p>{street}</p> 
                    </div>
                    <div className={style.nearby}>
-                     <MdNearMe/>  <p> {neighbourhood} </p>
+                     <MdNearMe/>  <p> {nearby} </p>
                    </div>
                    <div className={style.star}>
                      <MdStarRate/> <p> {star}</p>
@@ -74,6 +85,7 @@ const [star , setStar] = useState(1)
        </div>
      
    </div>
+   </>
   )
 }
 
