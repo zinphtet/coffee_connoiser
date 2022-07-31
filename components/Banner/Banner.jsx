@@ -20,15 +20,27 @@ const Banner = () => {
       // dispatch({type:ACTION.set_coffee_stores , payload : nearbyData})
     }
  useEffect(() => {
-      const fetch =async ()=>{
-        const nearbyData = await fetchData(lng.toString() ,lat.toString() ,'coffee stores' ,10)
-        console.log('Nearby Data', nearbyData)
-        dispatch({type:ACTION.set_coffee_stores , payload : nearbyData})
+      const fetching =async ()=>{
+        // const nearbyData = await fetchData(lng.toString() ,lat.toString() ,'coffee stores' ,10)
+        // console.log('Nearby Data', nearbyData)
+        try{
+          const res = await fetch(`/api/getcoffeestores?lng=${lng}&lat=${lat}`)
+          // console.log('RESPONSE', res)
+          const coffeeStores =await res.json()
+          console.log( 'COFFEE STORES ',coffeeStores )
+          dispatch({type:ACTION.set_coffee_stores , payload : coffeeStores})
+        }catch(err){
+          console.log(err.message)
+        }
+       
+        // const coffeeStores = await res.json()
+        // console.log('BANNER ', coffeeStores)
+        // dispatch({type:ACTION.set_coffee_stores , payload : coffeeStores})
       }
-      if(lat && lng){
-          fetch()
-      }
- }, [lat , lng])
+    if(lat,lng){
+      fetching()
+    }
+ }, [lat,lng])
     // console.log(locationError , geoLoading , location)
     // dispatch({type:ACTION.set_location,payload : location})
    

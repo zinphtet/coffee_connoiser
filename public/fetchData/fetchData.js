@@ -27,7 +27,7 @@ const fetchData = async (lng, lat, query, limit) => {
 	const data = await response.json();
 	const photos = await fetchPhotos(query, limit);
 	// console.log('Photos Response', photos);
-	console.log('COFFEE STORES', data);
+	// console.log('COFFEE STORES', data);
 	const myData = data.features?.map(({ properties }, idx) => {
 		const { name, street, town, state } = properties;
 		return {
