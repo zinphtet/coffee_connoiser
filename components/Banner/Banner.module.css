@@ -22,8 +22,11 @@
 
 }
 
-
-@media screen and (max-width : 56.25rem) {
+.error{
+    font-size: 2rem;
+    color: rgb(171, 47, 47);
+}
+/* @media screen and (max-width : 56.25rem) {
     .banner_title{
 
         color:red;
@@ -40,4 +43,4 @@
 
         color:blue;
     }
- }
+ } */

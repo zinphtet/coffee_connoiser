@@ -5,9 +5,17 @@ import Banner from '../components/Banner/Banner';
 import ShopContainer from '../components/ShopContainer/ShopContainer';
 import dummyData from '../public/dummyData';
 import fetchData from '../public/fetchData/fetchData';
+import { useContext } from 'react';
+import { StoresContext } from '../public/Context/StoreContext';
 export async function getStaticProps(context) {
 	// console.log('DUMMY DATA', dummyData);
-	const coffeeShops = await fetchData();
+
+	const coffeeShops = await fetchData(
+		'96.093292',
+		'21.954510',
+		'coffee shops',
+		10
+	);
 	// console.log('COFFEESHOPS >>', coffeeShops);
 	return {
 		props: {
@@ -18,6 +26,7 @@ export async function getStaticProps(context) {
 
 export default function Home({ coffeeShops }) {
 	// console.log('PROPS >>', props);
+	const { state } = useContext(StoresContext);
 	return (
 		<>
 			<Head>
@@ -26,7 +35,10 @@ export default function Home({ coffeeShops }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Banner />
-			<ShopContainer data={coffeeShops} />
+			{state.nearCoffeeShops.length > 0 && (
+				<ShopContainer data={state.nearCoffeeShops} title="Nearby Cafe`" />
+			)}
+			<ShopContainer data={coffeeShops} title="Mandalay Cafe`" />
 		</>
 	);
 }

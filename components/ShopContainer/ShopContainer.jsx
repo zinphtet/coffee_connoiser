@@ -7,7 +7,7 @@ import fetchData from '../../public/fetchData/fetchData'
 
 
   
-  export default function ShopContainer({data}){
+  export default function ShopContainer({data , title}){
     // useEffect(()=>{
     //   const fetch = async () =>{
     //     const data = await fetchData()
@@ -17,7 +17,7 @@ import fetchData from '../../public/fetchData/fetchData'
     // },[])
       return (
       <div className={style.shop_container}>
-        <h2 className={style.container_title}>Mandalay Coffee Stores</h2>
+        <h2 className={style.container_title}>{title}</h2>
         <div className={style.stores}>
           {
             data.map(({...props},idx)=><ShopItem key={idx} {...props} />)

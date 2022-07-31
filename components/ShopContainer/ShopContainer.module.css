@@ -11,9 +11,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(27rem , 1fr));
     grid-gap: 4rem;
-    align-items: center;
+    /* align-items: center;
     justify-content: center;
-    justify-items: center;
+    justify-items: center; */
 }
 
 .container_title{

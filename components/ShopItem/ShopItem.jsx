@@ -14,8 +14,8 @@ const ShopItem = ({id ,name ,imgUrl,}) => {
                 src={imgUrl}
                 alt="Picture of the author"
                 className={style.img}
-                width= '250'
-                height = '200'
+                width= '500'
+                height = '300'
               
               />
           </div>

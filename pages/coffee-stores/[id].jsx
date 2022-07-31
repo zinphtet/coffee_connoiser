@@ -3,16 +3,23 @@ import { useRouter } from 'next/router'
 import style from './dynamic.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
-import img from '../../public/coffeeshop.jpg'
 import {GoLocation } from "react-icons/go";
 import { MdNearMe ,MdStarRate} from "react-icons/md";
 import dummyData from '../../public/dummyData'
 import Button from '../../components/Button/Button'
-import { useState } from 'react'
+import { useState ,useEffect} from 'react'
 import Head from 'next/head'
 import fetchData from '../../public/fetchData/fetchData'
+import { ObjectKeys } from '../../public/utils/utils'
+import { StoresContext } from '../../public/Context/StoreContext'
+import { useContext } from 'react'
 export async function getStaticPaths() {
-  const data = await fetchData()
+  const data = await fetchData(
+		'96.093292',
+		'21.954510',
+		'coffee shops',
+		10
+	);
   const pathsArr = data.map((data)=>{
     return {params :{id : data.id.toString()}}
   })
@@ -24,7 +31,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params}) {
-  const data = await fetchData()
+  const data = await fetchData(
+		'96.093292',
+		'21.954510',
+		'coffee shops',
+		10
+	);
   // const router = useRouter();
   // const {id} = router.query;
   // const curPost = dummyData.find((post)=>post.id.toString()===id)
@@ -32,19 +44,32 @@ export async function getStaticProps({params}) {
   // console.log('STATIC PROPS ',staticProps)
   return {
     // Passed to the page component as props
-    props: { post: data.find((item)=>item.id.toString() === id) },
+    props: { post: data.find((item)=>item.id.toString() === id)||{} },
   }
 }
 
 const DynamicShop = ({post}) => {
+  const [star , setStar] = useState(1)
+  const [curPost , setcurPost] = useState(post)
+  const {state} = useContext(StoresContext)
+//  console.log('DYANIC COFFEE ',state)
     const router = useRouter()
     if(router.isFallback){
       return <div>Loading ....</div>
     }
-  // const { id } = router.query
-const [star , setStar] = useState(1)
+  const { id } = router.query
+  useEffect(()=>{
+    if(!ObjectKeys(curPost)){
+      const myPost = state.nearCoffeeShops.find((item)=>item.id.toString() === id)
+      setcurPost(myPost)
+    }
+  },[id])
+
+  
+ 
+
   // console.log("CURRENT PROPS ",post)
-  const {name , imgUrl ,street , nearby} = post
+  const {name , imgUrl ,street , nearby} =curPost
   const handleVote = ()=>setStar(prev=>prev+1)
   return (
     <>
