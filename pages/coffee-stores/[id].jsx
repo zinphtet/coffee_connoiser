@@ -58,12 +58,44 @@ const DynamicShop = ({post}) => {
       return <div>Loading ....</div>
     }
   const { id } = router.query
+const handleCreateStores = async ({id,name,imgUrl,street,nearby})=>{
+  const data = {
+    id,
+    name,
+    imgUrl,
+    street,
+    nearby,
+    voting :0
+  }
+   const response = await fetch('/api/createCoffeeStores',{
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  })
+  const storedData = await response.json()
+
+  console.log('Response data' , storedData)
+}
+
   useEffect(()=>{
     if(!ObjectKeys(curPost)){
-      const myPost = state.nearCoffeeShops.find((item)=>item.id.toString() === id)
-      setcurPost(myPost)
+      const myPost = state.nearCoffeeShops.find((item)=>item.id.toString() === id )
+      if(myPost){
+          handleCreateStores(myPost)
+        setcurPost(myPost)
+      }
+    }else{
+      handleCreateStores(curPost)
     }
-  },[id])
+  },[id , curPost])
 
   
  
@@ -89,7 +121,7 @@ const DynamicShop = ({post}) => {
           </h3>
           <div className={style.info}>
              <div className={style.img_container}>
-                <Image src={imgUrl} layout='fill' className={style.img}
+                <Image src={imgUrl}  layout='fill' className={style.img}
                 objectFit='cover'
                  />
              </div>
