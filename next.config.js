@@ -10,7 +10,7 @@ const nextConfig = {
 // module.exports = nextConfig;
 
 module.exports = {
-	reactStrictMode: true,
+	reactStrictMode: false,
 	swcMinify: true,
 	images: {
 		domains: ['images.unsplash.com'],

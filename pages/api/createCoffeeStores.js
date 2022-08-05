@@ -1,4 +1,8 @@
-import { table, getRecords } from '../../public/Airtable/airtable';
+import {
+	table,
+	getRecords,
+	fetchedStores,
+} from '../../public/Airtable/airtable';
 
 // console.log({ table });
 
@@ -12,7 +16,6 @@ const createCoffeeStores = async (req, res) => {
 					.select({ filterByFormula: `id="${id}"` })
 					.firstPage();
 				if (fetchedCoffeeStores.length > 0) {
-					// const records = fetchedCoffeeStores.map((record) => record.fields);
 					const records = getRecords(fetchedCoffeeStores);
 					console.log('RECORDS', records);
 					res.json(records);
@@ -29,7 +32,6 @@ const createCoffeeStores = async (req, res) => {
 							},
 						},
 					]);
-					// const myRecords= (await records).map((rec) => rec.fields);
 					const myRecords = await records;
 					const createdRecords = getRecords(myRecords);
 					res.json({ alert: 'Created Records', created: createdRecords });

@@ -5,5 +5,21 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
 export const table = base('coffee-stores');
 
 export const getRecords = (fetchedRecords) => {
-	return fetchedRecords.map((rec) => rec.fields);
+	// console.log('fetched Records ', fetchedRecords);
+	return fetchedRecords.map((rec) => {
+		return {
+			recordId: rec.id,
+			...rec.fields,
+		};
+	});
+};
+
+export const fetchedStores = async (id) => {
+	const fetchedCoffeeStores = await table
+		.select({ filterByFormula: `id="${id}"` })
+		.firstPage();
+
+	const records = getRecords(fetchedCoffeeStores);
+	// console.log('RECORDS', records);
+	return records;
 };
